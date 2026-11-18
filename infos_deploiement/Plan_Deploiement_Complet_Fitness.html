@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan de Déploiement Fitness — Alwaysdata (saidomar)</title>
+  <style>
+    :root {
+      --navy: #1e2454;
+      --purple: #6b4c9a;
+      --light-bg: #f4f5f9;
+      --green-bg: #e7f4ea;
+      --purple-bg: #ede9f6;
+      --blue-bg: #e8eef7;
+      --border: #d9dce8;
+      --text: #222638;
+      --muted: #5a607a;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: #e9ebf2;
+      margin: 0;
+      padding: 24px;
+      line-height: 1.5;
+    }
+    .toolbar {
+      max-width: 960px;
+      margin: 0 auto 16px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--navy);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 8px;
+    }
+    .toolbar button {
+      background: #fff;
+      color: var(--navy);
+      border: none;
+      padding: 8px 16px;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .toolbar button:hover {
+      background: var(--purple-bg);
+    }
+    .page {
+      max-width: 960px;
+      margin: 0 auto 24px auto;
+      background: #fff;
+      padding: 40px 48px;
+      border-radius: 8px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid var(--navy);
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+    .brand {
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--navy);
+      letter-spacing: 0.5px;
+    }
+    .brand span {
+      display: block;
+      font-size: 12px;
+      color: var(--purple);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+    .doc-meta {
+      text-align: right;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .kicker {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--purple);
+      letter-spacing: 0.8px;
+      margin-bottom: 4px;
+    }
+    h1 {
+      font-size: 28px;
+      color: var(--navy);
+      margin: 0 0 6px 0;
+    }
+    .subtitle {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--purple);
+      margin-bottom: 16px;
+    }
+    .info-box {
+      background: var(--light-bg);
+      border-left: 4px solid var(--navy);
+      padding: 14px 18px;
+      border-radius: 4px;
+      margin-bottom: 22px;
+      font-size: 14px;
+    }
+    .info-box p {
+      margin: 6px 0;
+    }
+    h2 {
+      font-size: 19px;
+      color: var(--navy);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+      margin-top: 28px;
+      margin-bottom: 14px;
+    }
+    h3 {
+      font-size: 16px;
+      color: var(--navy);
+      margin: 18px 0 8px 0;
+    }
+    .arch-flow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 16px 0 24px 0;
+      text-align: center;
+    }
+    .arch-card {
+      flex: 1;
+      padding: 14px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .arch-card small {
+      display: block;
+      font-weight: 400;
+      color: var(--text);
+      margin-top: 4px;
+      font-size: 12px;
+    }
+    .bg-blue { background: var(--blue-bg); }
+    .bg-green { background: var(--green-bg); }
+    .bg-purple { background: var(--purple-bg); }
+    .arch-arrow {
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--purple);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-size: 13.5px;
+    }
+    th {
+      background: var(--navy);
+      color: #fff;
+      text-align: left;
+      padding: 9px 12px;
+      font-weight: 600;
+    }
+    td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    tr:nth-child(even) td {
+      background: #fafbfe;
+    }
+    .step-card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin-bottom: 18px;
+      page-break-inside: avoid;
+    }
+    .step-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+      margin: 0 0 10px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .badge-ok {
+      background: #1b7f3b;
+      color: #fff;
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+    ul {
+      margin: 6px 0 12px 0;
+      padding-left: 20px;
+      font-size: 13.8px;
+    }
+    li {
+      margin-bottom: 4px;
+    }
+    .result-box {
+      background: var(--light-bg);
+      padding: 10px 14px;
+      border-radius: 4px;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    .result-box p {
+      margin: 4px 0;
+    }
+    .check-line {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--navy);
+      font-weight: 600;
+    }
+    pre, code {
+      font-family: Consolas, "Courier New", monospace;
+    }
+    code {
+      background: #eef0f7;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 12.5px;
+      color: #2b3058;
+    }
+    pre {
+      background: #1b1f3b;
+      color: #f1f3f9;
+      padding: 12px 14px;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 12.5px;
+      margin: 8px 0;
+    }
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+    .footer {
+      margin-top: 28px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+      .toolbar {
+        display: none;
+      }
+      .page {
+        box-shadow: none;
+        margin: 0;
+        padding: 18px 24px;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <div><strong>Dossier Technique & Plan de Déploiement — Fitness (Alwaysdata)</strong></div>
+    <button onclick="window.print()">🖨️ Imprimer / Enregistrer en PDF</button>
+  </div>
+
+  <div class="page">
+    <div class="header-top">
+      <div class="brand">
+        ALOALO MAYOTTE COMPÉTENCES
+        <span>DWWM – BLOC 2 • DOSSIER TECHNIQUE DE DÉPLOIEMENT</span>
+      </div>
+      <div class="doc-meta">
+        Compte Alwaysdata : <strong>saidomar</strong><br/>
+        Site : <strong>https://saidomar.alwaysdata.net</strong><br/>
+        Base SQL : <strong>saidomar_fitness</strong>
+      </div>
+    </div>
+
+    <div class="kicker">SUPPORT APPRENANT · PLAN OPÉRATIONNEL COMPLÉTÉ</div>
+    <h1>Plan de déploiement de l'application Fitness</h1>
+    <div class="subtitle">7 étapes | Back-end Node.js/Express sur Alwaysdata | MariaDB | Front-end Vue.js</div>
+
+    <div class="info-box">
+      <p><strong>Objectif :</strong> Préparer, installer, configurer et vérifier le déploiement de l'application Fitness sur le compte Alwaysdata <code>saidomar</code>, via SFTP (FileZilla) et SSH, dans un ordre logique et reproductible.</p>
+      <p><strong>Périmètre :</strong> API Node.js/Express (<code>https://saidomar.alwaysdata.net</code>) et base MariaDB (<code>saidomar_fitness</code>) hébergées sur Alwaysdata ; front-end Vue.js hébergé sur plateforme externe (Vercel / Netlify).</p>
+    </div>
+
+    <h2>1. Architecture cible et composants</h2>
+    <div class="arch-flow">
+      <div class="arch-card bg-blue">
+        Navigateur utilisateur
+        <small>Exécution du client Vue.js<br/>Requêtes HTTPS + JWT</small>
+      </div>
+      <div class="arch-arrow">↔</div>
+      <div class="arch-card bg-green">
+        Front-end Vue.js (Vite)
+        <small>Hébergement statique externe<br/><code>VITE_API_URL=https://saidomar.alwaysdata.net</code></small>
+      </div>
+      <div class="arch-arrow">↔</div>
+      <div class="arch-card bg-purple">
+        API Node.js / Express
+        <small>Alwaysdata : <code>saidomar.alwaysdata.net</code><br/>Dossier : <code>/home/saidomar/www/api</code></small>
+      </div>
+      <div class="arch-arrow">↔</div>
+      <div class="arch-card bg-blue">
+        Base de données MariaDB
+        <small><code>mysql-saidomar.alwaysdata.net:3306</code><br/>Base : <code>saidomar_fitness</code></small>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Composant</th>
+          <th>Technologie & Version</th>
+          <th>Rôle dans Fitness</th>
+          <th>Hébergement & Paramètres</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Front-end</strong></td>
+          <td>Vue.js <code>^3.5.44</code><br/>Vite <code>^8.3.6</code></td>
+          <td>Interface utilisateur, navigation et formulaires</td>
+          <td>Hébergement web externe (Vercel / Netlify)</td>
+        </tr>
+        <tr>
+          <td><strong>Back-end API</strong></td>
+          <td>Node.js (<code>v24.14.0</code> local)<br/>Express <code>^5.2.1</code></td>
+          <td>Logique métier, authentification JWT (<code>jsonwebtoken ^9.0.3</code>, <code>bcrypt ^6.0.0</code>), routes REST</td>
+          <td>Alwaysdata (<code>https://saidomar.alwaysdata.net</code>)<br/>Entrée : <code>/home/saidomar/www/api/src/app.js</code></td>
+        </tr>
+        <tr>
+          <td><strong>Base de données</strong></td>
+          <td>MariaDB / MySQL<br/>Driver <code>mysql2 ^3.24.3</code></td>
+          <td>Stockage relationnel des rôles, droits, comptes, utilisateurs, adhérents, coachs, séances, salles, abonnements, participations</td>
+          <td>Alwaysdata (<code>mysql-saidomar.alwaysdata.net</code>)<br/>Base : <code>saidomar_fitness</code> | User : <code>saidomar</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>2. Vue d'ensemble des 7 étapes</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>N°</th>
+          <th>Étape</th>
+          <th>Point de contrôle</th>
+          <th>Statut</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>1</strong></td><td><strong>Préparer l'application</strong></td><td>Code, commit Git <code>fbbc888</code>, dépendances, <code>.env.example</code>, <code>.gitignore</code></td><td>☑ Validé</td></tr>
+        <tr><td><strong>2</strong></td><td><strong>Préparer Alwaysdata</strong></td><td>Accès SSH/SFTP (<code>ssh-saidomar.alwaysdata.net</code>), Node.js, dossier <code>/home/saidomar/www/api</code></td><td>☑ Validé</td></tr>
+        <tr><td><strong>3</strong></td><td><strong>Préparer MariaDB</strong></td><td>Base <code>saidomar_fitness</code>, utilisateur <code>saidomar</code>, tous les droits, import SQL</td><td>☑ Validé</td></tr>
+        <tr><td><strong>4</strong></td><td><strong>Installer l'API</strong></td><td>Transfert SFTP via FileZilla et <code>npm ci --omit=dev</code> en SSH</td><td>☑ Validé</td></tr>
+        <tr><td><strong>5</strong></td><td><strong>Configurer et démarrer</strong></td><td>Variables <code>DB_*</code> et <code>JWT_SECRET</code>, commande <code>node .../src/app.js</code>, logs</td><td>☑ Validé</td></tr>
+        <tr><td><strong>6</strong></td><td><strong>Connecter le front-end</strong></td><td>URL publique de l'API, compilation <code>npm run build</code>, publication</td><td>☑ Validé</td></tr>
+        <tr><td><strong>7</strong></td><td><strong>Tester et valider</strong></td><td>Tests HTTP, authentification JWT et opérations CRUD sur Postman</td><td>☑ Validé</td></tr>
+      </tbody>
+    </table>
+
+    <h2>3. Étapes détaillées : Préparation, Installation et Mise en service</h2>
+
+    <div class="step-card">
+      <div class="step-title">
+        <span>01 · Préparer l'application</span>
+        <span class="badge-ok">Étape validée</span>
+      </div>
+      <ul>
+        <li><strong>Version déployée :</strong> Version <code>1.0.0</code> — Commit Git <code>fbbc888</code>.</li>
+        <li><strong>Vérification du code source :</strong> Point d'entrée <code>src/app.js</code>, pool MariaDB dans <code>src/config/db.js</code>, présence de <code>package.json</code> et <code>package-lock.json</code>.</li>
+        <li><strong>Écoute dynamique :</strong> <code>src/app.js</code> utilise bien <code>process.env.PORT || 3000</code> et <code>process.env.IP || process.env.HOST || "0.0.0.0"</code>.</li>
+        <li><strong>Sécurité des secrets :</strong> Création de <code>backend/.env.example</code> (sans secrets) et <code>backend/.gitignore</code> excluant <code>node_modules/</code> et <code>.env</code>.</li>
+      </ul>
+      <div class="result-box">
+        <p><strong>Résultat attendu :</strong> Le projet est complet et ses dépendances, versions et configurations sont connues.</p>
+        <p><strong>Preuve / contrôle :</strong> Fichiers <code>package.json</code>, <code>.env.example</code> et référence Git <code>fbbc888</code>.</p>
+      </div>
+      <div class="check-line">☑ Étape validée &nbsp;&nbsp; ☐ À corriger &nbsp;&nbsp; Observations : Projet complet et testé en local.</div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-title">
+        <span>02 · Préparer l'environnement Alwaysdata</span>
+        <span class="badge-ok">Étape validée</span>
+      </div>
+      <ul>
+        <li><strong>Accès administration :</strong> Connexion sur <code>https://admin.alwaysdata.com</code> avec le compte <code>saidomar</code>.</li>
+        <li><strong>Accès distant SSH / SFTP :</strong> Hôte <code>ssh-saidomar.alwaysdata.net</code> (Port <code>22</code>), utilisateur <code>saidomar</code>, connexion SSH activée.</li>
+        <li><strong>Runtime Node.js :</strong> Vérifié dans <code>Environnement &gt; Node.js</code> (version LTS compatible Express 5 / bcrypt 6).</li>
+        <li><strong>Emplacement cible :</strong> Répertoire <code>/home/saidomar/www/api</code> et adresse publique <code>https://saidomar.alwaysdata.net</code>.</li>
+      </ul>
+      <div class="result-box">
+        <p><strong>Résultat attendu :</strong> L'hébergement est prêt à recevoir l'API Fitness.</p>
+        <p><strong>Preuve / contrôle :</strong> Connexion SSH et SFTP fonctionnelle sur <code>ssh-saidomar.alwaysdata.net</code>.</p>
+      </div>
+      <div class="check-line">☑ Étape validée &nbsp;&nbsp; ☐ À corriger &nbsp;&nbsp; Observations : Accès SSH et FileZilla opérationnels.</div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-title">
+        <span>03 · Préparer la base MariaDB</span>
+        <span class="badge-ok">Étape validée</span>
+      </div>
+      <ul>
+        <li><strong>Base MariaDB créée :</strong> <code>saidomar_fitness</code> sur le serveur <code>mysql-saidomar.alwaysdata.net</code> (port <code>3306</code>).</li>
+        <li><strong>Utilisateur SQL :</strong> <code>saidomar</code> avec l'autorisation <strong>« Tous les droits »</strong> (lecture + écriture) sur <code>saidomar_fitness</code>.</li>
+        <li><strong>Import SQL via phpMyAdmin :</strong> Importation du script <code>database.sql</code> dans la base <code>saidomar_fitness</code> (en ciblant directement la base <code>saidomar_fitness</code> sans exécuter <code>DROP/CREATE/USE fitness</code>).</li>
+        <li><strong>Contrôle SQL effectué dans phpMyAdmin :</strong>
+          <pre><code>SHOW TABLES;
+SELECT a.id_adherent, u.nom, u.prenom, a.poids, a.imc, a.contrat
+FROM adherent a JOIN utilisateur u ON a.id_utilisateur = u.id_utilisateur LIMIT 10;</code></pre>
+        </li>
+      </ul>
+      <div class="result-box">
+        <p><strong>Résultat attendu :</strong> La base <code>saidomar_fitness</code> et ses 11 tables (<code>role</code>, <code>droit</code>, <code>role_droit</code>, <code>compte</code>, <code>utilisateur</code>, <code>abonnement</code>, <code>adherent</code>, <code>coach</code>, <code>salle</code>, <code>seance</code>, <code>participation</code>) sont accessibles.</p>
+        <p><strong>Preuve / contrôle :</strong> Liste des tables et affichage des 5 adhérents de test dans phpMyAdmin.</p>
+      </div>
+      <div class="check-line">☑ Étape validée &nbsp;&nbsp; ☐ À corriger &nbsp;&nbsp; Observations : Import SQL terminé avec succès dans <code>saidomar_fitness</code>.</div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-title">
+        <span>04 · Installer le back-end Node.js / Express (FileZilla + SSH)</span>
+        <span class="badge-ok">Étape validée</span>
+      </div>
+      <ul>
+        <li><strong>Transfert SFTP avec FileZilla :</strong> Connexion à <code>ssh-saidomar.alwaysdata.net</code> (port 22, user <code>saidomar</code>), création du dossier <code>/home/saidomar/www/api</code> et envoi de <code>src/</code>, <code>package.json</code> et <code>package-lock.json</code> (sans <code>node_modules/</code> ni <code>.env</code>).</li>
+        <li><strong>Installation des dépendances en SSH :</strong>
+          <pre><code>ssh saidomar@ssh-saidomar.alwaysdata.net
+cd /home/saidomar/www/api
+node -v && npm -v
+npm ci --omit=dev</code></pre>
+        </li>
+      </ul>
+      <div class="result-box">
+        <p><strong>Résultat attendu :</strong> Les fichiers et les modules de production (<code>node_modules/</code>) sont installés sur Alwaysdata.</p>
+        <p><strong>Preuve / contrôle :</strong> Exécution de <code>npm ci --omit=dev</code> sans erreur dans le terminal SSH.</p>
+      </div>
+      <div class="check-line">☑ Étape validée &nbsp;&nbsp; ☐ À corriger &nbsp;&nbsp; Observations : Dépendances installées proprement via SSH.</div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-title">
+        <span>05 · Configurer et démarrer l'API</span>
+        <span class="badge-ok">Étape validée</span>
+      </div>
+      <ul>
+        <li><strong>Configuration dans <code>Web &gt; Sites</code> :</strong> Site de type <strong>Node.js</strong> sur l'adresse <code>saidomar.alwaysdata.net</code>.</li>
+        <li><strong>Répertoire de travail :</strong> <code>/home/saidomar/www/api</code></li>
+        <li><strong>Commande de démarrage :</strong> <code>node /home/saidomar/www/api/src/app.js</code> (ou <code>npm start</code>).</li>
+        <li><strong>Variables d'environnement configurées sur le site :</strong>
+          <pre><code>NODE_ENV=production
+DB_HOST=mysql-saidomar.alwaysdata.net
+DB_PORT=3306
+DB_NAME=saidomar_fitness
+DB_USER=saidomar
+DB_PASSWORD=[SECRET_MASQUÉ]
+JWT_SECRET=[SECRET_MASQUÉ]
+JWT_EXPIRES_IN=1h</code></pre>
+        </li>
+        <li><strong>Démarrage :</strong> Enregistrement et redémarrage du site dans <code>Web &gt; Sites</code> ; vérification des journaux (<code>Web &gt; Sites &gt; Logs</code>).</li>
+      </ul>
+      <div class="result-box">
+        <p><strong>Résultat attendu :</strong> L'API démarre et répond sur <code>https://saidomar.alwaysdata.net</code>.</p>
+        <p><strong>Preuve / contrôle :</strong> Réponse HTTP <code>200 OK</code> sur <code>https://saidomar.alwaysdata.net/</code>.</p>
+      </div>
+      <div class="check-line">☑ Étape validée &nbsp;&nbsp; ☐ À corriger &nbsp;&nbsp; Observations : L'API écoute sur les variables IP/PORT fournies par Alwaysdata.</div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-title">
+        <span>06 · Connecter le front-end Vue.js à l'API</span>
+        <span class="badge-ok">Étape validée</span>
+      </div>
+      <ul>
+        <li><strong>Configuration de l'URL de production :</strong> Paramétrage de <code>VITE_API_URL=https://saidomar.alwaysdata.net</code> (aucun appel à <code>localhost</code> en production).</li>
+        <li><strong>Compilation :</strong> Exécution de <code>npm run build</code> générant le dossier <code>dist/</code>.</li>
+        <li><strong>Publication :</strong> Déploiement du front-end sur l'hébergement externe (Vercel / Netlify) et vérification des échanges CORS avec l'API Alwaysdata.</li>
+      </ul>
+      <div class="result-box">
+        <p><strong>Résultat attendu :</strong> Le front-end publié échange correctement en HTTPS avec l'API Alwaysdata.</p>
+        <p><strong>Preuve / contrôle :</strong> Requêtes réseau réussies depuis le navigateur vers <code>https://saidomar.alwaysdata.net</code>.</p>
+      </div>
+      <div class="check-line">☑ Étape validée &nbsp;&nbsp; ☐ À corriger &nbsp;&nbsp; Observations : CORS configuré et URL publique fonctionnelle.</div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-title">
+        <span>07 · Tester et valider le déploiement (Postman)</span>
+        <span class="badge-ok">Étape validée</span>
+      </div>
+      <ul>
+        <li><strong>Test de mise en ligne HTTP :</strong> <code>GET https://saidomar.alwaysdata.net/</code> → Code <code>200 OK</code> (<code>Hello World!</code>).</li>
+        <li><strong>Tests de lecture MariaDB (routes publiques) :</strong>
+          <ul>
+            <li><code>GET https://saidomar.alwaysdata.net/coachs</code> → <code>200 OK</code> (liste des 4 coachs)</li>
+            <li><code>GET https://saidomar.alwaysdata.net/seances</code> → <code>200 OK</code> (liste des 5 séances)</li>
+            <li><code>GET https://saidomar.alwaysdata.net/abonnements</code> → <code>200 OK</code> (liste des 4 abonnements)</li>
+          </ul>
+        </li>
+        <li><strong>Test d'authentification JWT :</strong> <code>POST https://saidomar.alwaysdata.net/auth/login</code> avec <code>{"email":"admin@fitness.com","password":"password123"}</code> → Retourne un <code>accessToken</code> JWT valide.</li>
+        <li><strong>Tests CRUD complets sur les adhérents (avec Header <code>Authorization: Bearer &lt;TOKEN&gt;</code>) :</strong>
+          <ul>
+            <li><code>GET https://saidomar.alwaysdata.net/adherents</code> → <code>200 OK</code></li>
+            <li><code>POST https://saidomar.alwaysdata.net/adherents</code> (création d'un adhérent fictif) → <code>201 Created</code></li>
+            <li><code>PUT https://saidomar.alwaysdata.net/adherents/:id</code> (modification du poids) → <code>200 OK</code></li>
+            <li><code>DELETE https://saidomar.alwaysdata.net/adherents/:id</code> (suppression du test) → <code>200 OK</code></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="result-box">
+        <p><strong>Résultat attendu :</strong> La version déployée est utilisable en ligne et toutes les vérifications Postman sont validées.</p>
+        <p><strong>Preuve / contrôle :</strong> Captures des tests Postman (statut 200/201) et vérification dans phpMyAdmin.</p>
+      </div>
+      <div class="check-line">☑ Étape validée &nbsp;&nbsp; ☐ À corriger &nbsp;&nbsp; Observations : Vérification complète effectuée dans Postman pour confirmer la mise en ligne.</div>
+    </div>
+
+    <h2>4. Bilan du déploiement</h2>
+    <table>
+      <tbody>
+        <tr>
+          <td style="width: 30%; font-weight: 700; background: var(--light-bg);">Version / commit</td>
+          <td><code>1.0.0</code> — Commit Git <code>fbbc888</code></td>
+        </tr>
+        <tr>
+          <td style="font-weight: 700; background: var(--light-bg);">URL de l'API</td>
+          <td><code>https://saidomar.alwaysdata.net</code></td>
+        </tr>
+        <tr>
+          <td style="font-weight: 700; background: var(--light-bg);">Base de données / Utilisateur</td>
+          <td>Base : <code>saidomar_fitness</code> (<code>mysql-saidomar.alwaysdata.net:3306</code>) — User : <code>saidomar</code></td>
+        </tr>
+        <tr>
+          <td style="font-weight: 700; background: var(--light-bg);">Statut final</td>
+          <td><strong>☑ Validé</strong> &nbsp;&nbsp;&nbsp;&nbsp; ☐ À corriger &nbsp;&nbsp;&nbsp;&nbsp; ☐ Non réalisé</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="footer">
+      <span>ALOALO Mayotte Compétences • Application Fitness • Dossier réalisé par <strong>saidomar</strong></span>
+      <span>DWWM / PLAN DE DÉPLOIEMENT</span>
+    </div>
+  </div>
+
+</body>
+</html>

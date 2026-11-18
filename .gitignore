@@ -1,0 +1,21 @@
+# Dépendances
+node_modules/
+**/node_modules/
+
+# Ignorer TOUS les fichiers .env (backend ET frontend)
+.env
+.env.*
+**/.env
+**/.env.*
+
+# Autoriser uniquement les modèles .env.example (sans secrets)
+!.env.example
+!**/.env.example
+
+# Fichiers de build et temporaires
+dist/
+**/dist/
+*.log
+.DS_Store
+.agents/
+.claude/
